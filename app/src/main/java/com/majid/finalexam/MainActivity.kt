@@ -1,7 +1,13 @@
 package com.majid.finalexam
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -16,12 +22,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.editTextNumber.isEnabled = false
+        binding.editTextNumber.visibility = View.GONE
         var convertFromString: String = ""
         var sideSelected = 0
         val arrayAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, diceOptions)
         binding.spinnerDice.adapter = arrayAdapter
+        val clickableText = "Custom Input?"
+        val spannableString = SpannableString(clickableText)
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(view: View) {
+                binding.editTextNumber.isEnabled = true
+                binding.editTextNumber.visibility = View.VISIBLE
+            }
+        }
+
+        spannableString.setSpan(clickableSpan, 0, clickableText.length, SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.customInput.text = spannableString
+        binding.customInput.movementMethod = LinkMovementMethod.getInstance()
+
         binding.spinnerDice.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
