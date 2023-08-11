@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
@@ -68,13 +69,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
         fun rollDice(side: Int,rolls: Int) :String  {
             var results = mutableListOf<Int>()
-            val die = Die(side)
-            val roll1 = die.roll()
-            val roll2 = die.roll()
-            results.add(roll1)
-            results.add(roll2)
+            val userInput = binding.editTextNumber.text
+            if(userInput.toString() == "") {
+                val die = Die(side)
+                val roll1 = die.roll()
+                val roll2 = die.roll()
+                results.add(roll1)
+                results.add(roll2)
+            }
+            else{
+                val die = Die(userInput.toString().toInt())
+                val roll1 = die.roll()
+                val roll2 = die.roll()
+                results.add(roll1)
+                results.add(roll2)
+            }
+
 
             if (rolls == 1) {
                 return "${results[0]}"
@@ -83,6 +97,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
         binding.rollTwiceButton.setOnClickListener {
             val resulttext = rollDice(sideSelected,2)
             binding.resultText.text = resulttext
