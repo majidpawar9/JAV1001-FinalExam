@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/newbackground"
+    android:backgroundTintMode="src_in"
     android:gravity="center"
     android:orientation="vertical"
     android:visibility="visible"
@@ -14,41 +15,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-
         android:text="Die Rolling Game"
         android:textColor="#000000"
         android:textSize="34sp"
         android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/indicateSides"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Number of Sides"
+        android:layout_marginBottom="10dp"
+        android:textColor="#F44336"
+        android:textSize="24sp" />
 
     <Spinner
         android:id="@+id/spinnerDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/white"/>
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/rollOnceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Roll"
-        android:textColor="@color/white"/>
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#CF3636"
+        android:text="Roll Once" />
 
-    <Switch
-        android:id="@+id/switch1"
+    <Button
+        android:id="@+id/rollTwiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Roll Twice?"
-        android:textColor="@color/white"/>
+        android:backgroundTint="#CF3636"
+        android:layout_marginBottom="10dp"
+        android:text="Roll Twice" />
 
+    <TextView
+        android:id="@+id/indicateResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textColor="#05CDE6"
+        android:textSize="22sp"
+        android:text="Result is"/>
     <TextView
         android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-/>
+        android:textColor="#05CDE6"
+        android:textSize="22sp"
+        android:text=""/>
 
-
-
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/dicefaded" />
 </LinearLayout>
