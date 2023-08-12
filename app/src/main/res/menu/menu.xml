@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <!-- Menu item for accessing the application's settings. -->
+        <!-- Menu item for accessing the previous user inputs. -->
         <item android:id="@+id/previousUserInput"
             android:title="Previous User Inputs"
             android:orderInCategory="100"

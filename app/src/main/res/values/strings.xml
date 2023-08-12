@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">FinalExam</string>
+    <string name="side_selection_indicator">Select Number of Sides</string>
+    <string name="custom_sides">Custom Dice Sides?</string>
+    <string name="previous_input_indicator">The previous user inputs were: </string>
+    <string name="custom_input_hint">Please clear the custom input to use spinner again</string>
+    <string name="rollOnce">Roll Once</string>
+    <string name="rollTwice">Roll Twice</string>
+    <string name="result">Result is</string>
+    <string name="about_string">This App is made by Majid Pawar</string>
+
+
+
 </resources>

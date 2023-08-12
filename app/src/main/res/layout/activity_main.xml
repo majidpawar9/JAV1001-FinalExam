@@ -10,41 +10,47 @@
     android:orientation="vertical"
     android:visibility="visible">
 
+<!-- Custom Toolbar for the app -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myToolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="25dp"
         android:layout_gravity="center"
-        android:background="#F44336"
+        android:background="@color/orange"
         android:textAlignment="center" />
 
+<!-- Text view indicating to select number of sides -->
     <TextView
         android:id="@+id/indicateSides"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="10dp"
-        android:text="Select Number of Sides"
-        android:textColor="#F44336"
+        android:text="@string/side_selection_indicator"
+        android:textColor="@color/orange"
         android:textSize="24sp" />
 
+ <!-- Spinner for selecting dice sides -->
     <Spinner
         android:id="@+id/spinnerDice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible" />
 
+<!-- Layout for custom dice input -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <!-- Text view for custom dice input -->
         <TextView
             android:id="@+id/customInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Custom Dice Sides?" />
+            android:text="@string/custom_sides" />
 
+        <!-- Edit text for custom dice input -->
         <EditText
             android:id="@+id/editTextNumber"
             android:layout_width="match_parent"
@@ -53,19 +59,22 @@
             android:inputType="number" />
     </LinearLayout>
 
+<!-- Layout for displaying previous user inputs -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Text view indicating previous user inputs -->
         <TextView
             android:id="@+id/inputIndicatingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The previous user inputs were: "
-            android:textColor="#F44336"
+            android:text="@string/previous_input_indicator"
+            android:textColor="@color/orange"
             android:textSize="16sp" />
 
+        <!-- Text view for displaying the previous user inputs -->
         <TextView
             android:id="@+id/arrayTextView"
             android:layout_width="wrap_content"
@@ -75,45 +84,51 @@
             android:gravity="center"/>
     </LinearLayout>
 
+<!-- Text view for hint -->
     <TextView
         android:id="@+id/hintText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Please clear the custom input to use spinner again" />
+        android:hint="@string/custom_input_hint" />
 
+<!-- Button for rolling the dice once -->
     <Button
         android:id="@+id/rollOnceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="#CF3636"
-        android:text="Roll Once" />
+        android:backgroundTint="@color/red"
+        android:text="@string/rollOnce" />
 
+<!-- Button for rolling the dice twice -->
     <Button
         android:id="@+id/rollTwiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="#CF3636"
-        android:text="Roll Twice" />
+        android:backgroundTint="@color/red"
+        android:text="@string/rollTwice" />
 
+<!-- Text view indicating the result -->
     <TextView
         android:id="@+id/indicateResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Result is"
-        android:textColor="#3F51B5"
+        android:text="@string/result"
+        android:textColor="@color/blue"
         android:textSize="22sp" />
 
+<!-- Text view displaying the result -->
     <TextView
         android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textColor="#DC1212"
+        android:textColor="@color/red"
         android:textSize="22sp" />
 
+<!-- ImageView for displaying an image -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="center"
-                android:background="#F44336"
+                android:background="@color/orange"
                 android:elevation="4dp" />
 
             <!-- Text view displaying app creator information. -->
@@ -33,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="70dp"
-                android:text="This App is made by Majid Pawar"
-                android:textColor="#F44336"
+                android:text="@string/about_string"
+                android:textColor="@color/orange"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </com.google.android.material.appbar.AppBarLayout>
