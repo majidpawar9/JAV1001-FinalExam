@@ -47,21 +47,33 @@ class MainActivity : AppCompatActivity() {
         binding.spinnerDice.adapter = arrayAdapter
         val clickableText = "Custom Input?"
         val spannableString = SpannableString(clickableText)
+        binding.inputIndicatingTextView.isEnabled = false
+        binding.inputIndicatingTextView.visibility = View.GONE
+        binding.arrayTextView.visibility = View.GONE
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(view: View) {
-                if(binding.editTextNumber.isEnabled == false){
-                binding.editTextNumber.isEnabled = true
-                binding.editTextNumber.visibility = View.VISIBLE
-                }
-                else{
+                if (binding.editTextNumber.isEnabled == false) {
+                    binding.editTextNumber.isEnabled = true
+                    binding.editTextNumber.visibility = View.VISIBLE
+                    binding.inputIndicatingTextView.isEnabled = true
+                    binding.inputIndicatingTextView.visibility = View.VISIBLE
+                    binding.arrayTextView.visibility = View.VISIBLE
+                } else {
                     binding.editTextNumber.isEnabled = false
                     binding.editTextNumber.visibility = View.GONE
-
+                    binding.inputIndicatingTextView.isEnabled = false
+                    binding.inputIndicatingTextView.visibility = View.GONE
+                    binding.arrayTextView.visibility = View.GONE
                 }
             }
         }
 
-        spannableString.setSpan(clickableSpan, 0, clickableText.length, SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            clickableSpan,
+            0,
+            clickableText.length,
+            SpannableStringBuilder.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         binding.customInput.text = spannableString
         binding.customInput.movementMethod = LinkMovementMethod.getInstance()
 
@@ -93,18 +105,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        fun rollDice(side: Int,rolls: Int) :String  {
+        fun rollDice(side: Int, rolls: Int): String {
 
             var results = mutableListOf<Int>()
             val userInput = binding.editTextNumber.text
-            if(userInput.toString() == "") {
+            if (userInput.toString() == "") {
                 val die = Die(side)
                 val roll1 = die.roll()
                 val roll2 = die.roll()
                 results.add(roll1)
                 results.add(roll2)
-            }
-            else{
+            } else {
                 uniqueUserInputs.add(userInput.toString())
                 val die = Die(userInput.toString().toInt())
                 val roll1 = die.roll()
@@ -117,22 +128,24 @@ class MainActivity : AppCompatActivity() {
             if (rolls == 1) {
                 return "${results[0]}"
             } else {
-               return "${results[0]} and ${results[1]}"
+                return "${results[0]} and ${results[1]}"
             }
 
         }
 
         binding.rollTwiceButton.setOnClickListener {
-            val resulttext = rollDice(sideSelected,2)
+            val resulttext = rollDice(sideSelected, 2)
             binding.resultText.text = resulttext
         }
         binding.rollOnceButton.setOnClickListener {
-            val resulttext = rollDice(sideSelected,1)
+            val resulttext = rollDice(sideSelected, 1)
             binding.resultText.text = resulttext
         }
-
+        val savedText = sharedPref.getString("savedText", "")
+        binding.arrayTextView.text = savedText
 
     }
+
     // This function will inflate the menu xml file
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         getMenuInflater().inflate(R.menu.menu, menu)
@@ -146,6 +159,9 @@ class MainActivity : AppCompatActivity() {
                 // Start the SettingActivity when the "Setting" option is selected.
                 val formattedText = formatArrayToString(uniqueUserInputs)
                 binding.arrayTextView.text = formattedText
+                val editor = sharedPref.edit()
+                editor.putString("savedText", formattedText)
+                editor.apply()
             }
 
             R.id.about -> {
@@ -155,6 +171,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     private fun formatArrayToString(intArray: HashSet<String>): String {
         return intArray.joinToString(", ")
     }

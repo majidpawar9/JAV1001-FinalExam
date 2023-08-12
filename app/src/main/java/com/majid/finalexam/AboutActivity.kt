@@ -19,6 +19,7 @@ class AboutActivity : AppCompatActivity() {
         // Enable the back arrow in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
