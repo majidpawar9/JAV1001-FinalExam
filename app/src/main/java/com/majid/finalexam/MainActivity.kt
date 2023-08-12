@@ -1,6 +1,8 @@
 package com.majid.finalexam
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,14 +11,20 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.majid.finalexam.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var toolbar: Toolbar
+    val uniqueUserInputs = LinkedHashSet<String>()
     val diceOptions = arrayOf("4", "6", "8", "10", "12", "20")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.editTextNumber.isEnabled = false
         binding.editTextNumber.visibility = View.GONE
+
+        toolbar = binding.myToolBar
+        // Set the custom toolbar as the support action bar.
+        setSupportActionBar(toolbar)
+        // Set the title for the action bar.
+        getSupportActionBar()?.setTitle("Dice Rolling App")
+        sharedPref = getSharedPreferences("finalexam", Context.MODE_PRIVATE)
         var convertFromString: String = ""
         var sideSelected = 0
         val arrayAdapter =
@@ -34,8 +49,15 @@ class MainActivity : AppCompatActivity() {
         val spannableString = SpannableString(clickableText)
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(view: View) {
+                if(binding.editTextNumber.isEnabled == false){
                 binding.editTextNumber.isEnabled = true
                 binding.editTextNumber.visibility = View.VISIBLE
+                }
+                else{
+                    binding.editTextNumber.isEnabled = false
+                    binding.editTextNumber.visibility = View.GONE
+
+                }
             }
         }
 
@@ -72,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fun rollDice(side: Int,rolls: Int) :String  {
+
             var results = mutableListOf<Int>()
             val userInput = binding.editTextNumber.text
             if(userInput.toString() == "") {
@@ -82,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                 results.add(roll2)
             }
             else{
+                uniqueUserInputs.add(userInput.toString())
                 val die = Die(userInput.toString().toInt())
                 val roll1 = die.roll()
                 val roll2 = die.roll()
@@ -106,5 +130,33 @@ class MainActivity : AppCompatActivity() {
             val resulttext = rollDice(sideSelected,1)
             binding.resultText.text = resulttext
         }
+
+
     }
+    // This function will inflate the menu xml file
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.menu, menu)
+        return true
+    }
+
+    // Handle options menu item selections.
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.previousUserInput -> {
+                // Start the SettingActivity when the "Setting" option is selected.
+                val formattedText = formatArrayToString(uniqueUserInputs)
+                binding.arrayTextView.text = formattedText
+            }
+
+            R.id.about -> {
+                // Start the AboutActivity when the "About" option is selected.
+                startActivity(Intent(this, AboutActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun formatArrayToString(intArray: HashSet<String>): String {
+        return intArray.joinToString(", ")
+    }
+
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <!-- Menu item for accessing the application's settings. -->
+        <item android:id="@+id/previousUserInput"
+            android:title="Previous User Inputs"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
+        <!-- Menu item for accessing information about the application. -->
+        <item android:id="@+id/about"
+            android:title="About"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
+
+</menu>
